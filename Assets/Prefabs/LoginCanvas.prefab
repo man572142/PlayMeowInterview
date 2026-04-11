@@ -3016,6 +3016,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2954480291301630265}
     m_Modifications:
+    - target: {fileID: 6849259768780704209, guid: f2913e61b2bc5ee40819f3eb09c131ae, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e8f75d74f46b3ff4599f61b6b1d5075b, type: 3}
     - target: {fileID: 6849259768780704221, guid: f2913e61b2bc5ee40819f3eb09c131ae, type: 3}
       propertyPath: m_Name
       value: InputField_Email
