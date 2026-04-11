@@ -20,6 +20,7 @@ namespace PlayMeow.UI
         [SerializeField] private Button closeButton;
 
         [Header("Feedback")]
+        [SerializeField] private TextMeshProUGUI inputHintText;
         [SerializeField] private TextMeshProUGUI errorText;
 
         private void Awake()
@@ -30,7 +31,11 @@ namespace PlayMeow.UI
             registerButton.onClick.AddListener(OnRegisterClicked);
             closeButton.onClick.AddListener(OnCloseClicked);
 
+            emailInput.onValueChanged.AddListener(OnInputValueChanged);
+            passwordInput.onValueChanged.AddListener(OnInputValueChanged);
+
             HideError();
+            UpdateEmptyInputsText();
         }
 
         private void OnDestroy()
@@ -40,9 +45,21 @@ namespace PlayMeow.UI
             forgotPasswordButton.onClick.RemoveListener(OnForgotPasswordClicked);
             registerButton.onClick.RemoveListener(OnRegisterClicked);
             closeButton.onClick.RemoveListener(OnCloseClicked);
+
+            emailInput.onValueChanged.RemoveListener(OnInputValueChanged);
+            passwordInput.onValueChanged.RemoveListener(OnInputValueChanged);
         }
 
-        public async void OnLoginClicked()
+        private void OnInputValueChanged(string _) => UpdateEmptyInputsText();
+
+        private void UpdateEmptyInputsText()
+        {
+            if (inputHintText == null) return;
+            
+            inputHintText.enabled = string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text);
+        }
+
+        private async void OnLoginClicked()
         {
             HideError();
             SetInteractable(false);
@@ -60,7 +77,7 @@ namespace PlayMeow.UI
                 ShowError(result.ErrorMessage);
         }
 
-        public async void OnGoogleLoginClicked()
+        private async void OnGoogleLoginClicked()
         {
             HideError();
             SetInteractable(false);
@@ -75,35 +92,35 @@ namespace PlayMeow.UI
                 ShowError(result.ErrorMessage);
         }
 
-        public void OnForgotPasswordClicked()
+        private void OnForgotPasswordClicked()
         {
             Debug.Log("[LoginView] Forgot password tapped.");
             // TODO: navigate to forgot-password screen
         }
 
-        public void OnRegisterClicked()
+        private void OnRegisterClicked()
         {
             Debug.Log("[LoginView] Register tapped.");
             // TODO: navigate to registration screen
         }
 
-        public void OnCloseClicked()
+        private void OnCloseClicked()
         {
             Debug.Log("[LoginView] Close tapped.");
             gameObject.SetActive(false);
         }
 
-        public void ShowError(string msg)
+        private void ShowError(string msg)
         {
             if (errorText == null) return;
             errorText.text = msg;
-            errorText.gameObject.SetActive(true);
+            errorText.enabled = true;
         }
 
-        public void HideError()
+        private void HideError()
         {
             if (errorText == null) return;
-            errorText.gameObject.SetActive(false);
+            errorText.enabled = false;
         }
 
         private void SetInteractable(bool interactable)
