@@ -3,7 +3,7 @@ using System;
 namespace PlayMeow.Editor
 {
     [Serializable]
-    public class EditorNote
+    public class ProjectNoteData
     {
         public string name = "New Note";
         public string description;

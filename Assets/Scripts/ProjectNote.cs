@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace PlayMeow.Editor
 {
-    public class EditorNoteDisplay : MonoBehaviour
+    public class ProjectNote : MonoBehaviour
     {
 #if UNITY_EDITOR
-        public EditorNoteBook noteBook;
+        public ProjectNoteBook noteBook;
         public int noteIndex;
 #endif
     }

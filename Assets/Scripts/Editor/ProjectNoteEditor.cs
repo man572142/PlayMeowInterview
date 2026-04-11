@@ -3,8 +3,8 @@ using UnityEditor;
 
 namespace PlayMeow.Editor
 {
-    [CustomEditor(typeof(EditorNoteDisplay))]
-    public class EditorNoteDisplayEditor : UnityEditor.Editor
+    [CustomEditor(typeof(ProjectNote))]
+    public class ProjectNoteEditor : UnityEditor.Editor
     {
         private SerializedProperty _noteBookProp;
         private SerializedProperty _noteIndexProp;
@@ -21,7 +21,7 @@ namespace PlayMeow.Editor
 
             EditorGUILayout.PropertyField(_noteBookProp);
 
-            var display = (EditorNoteDisplay)target;
+            var display = (ProjectNote)target;
             var noteBook = display.noteBook;
 
             if (noteBook != null && noteBook.notes != null && noteBook.notes.Count > 0)

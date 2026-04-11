@@ -4,9 +4,9 @@ using UnityEngine;
 namespace PlayMeow.Editor
 {
     [CreateAssetMenu(fileName = "NewEditorNoteBook", menuName = "PlayMeow/Editor Note Book")]
-    public class EditorNoteBook : ScriptableObject
+    public class ProjectNoteBook : ScriptableObject
     {
-        public List<EditorNote> notes = new List<EditorNote>();
+        public List<ProjectNoteData> notes = new List<ProjectNoteData>();
 
         public string[] GetNoteNames()
         {
