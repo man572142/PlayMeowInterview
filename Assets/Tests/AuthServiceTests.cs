@@ -91,7 +91,7 @@ namespace PlayMeow.Tests
                     }
                 }
             };
-            _service.ProcessAuthResponse(response);
+            _service.ProcessAuthResponse(response, "login");
 
             _service.Logout();
 
@@ -106,7 +106,7 @@ namespace PlayMeow.Tests
         {
             var response = new GraphQLResponse { networkError = "timeout" };
 
-            var result = _service.ProcessAuthResponse(response);
+            var result = _service.ProcessAuthResponse(response, "login");
 
             Assert.IsFalse(result.Success);
         }
@@ -119,7 +119,7 @@ namespace PlayMeow.Tests
                 errors = new[] { new GraphQLError { message = "invalid credentials" } }
             };
 
-            var result = _service.ProcessAuthResponse(response);
+            var result = _service.ProcessAuthResponse(response, "login");
 
             Assert.IsFalse(result.Success);
         }
@@ -139,7 +139,7 @@ namespace PlayMeow.Tests
                 }
             };
 
-            var result = _service.ProcessAuthResponse(response);
+            var result = _service.ProcessAuthResponse(response, "login");
 
             Assert.IsTrue(result.Success);
             Assert.AreEqual("valid-token", result.Token);
@@ -158,7 +158,7 @@ namespace PlayMeow.Tests
                 }
             };
 
-            var result = _service.ProcessAuthResponse(response);
+            var result = _service.ProcessAuthResponse(response, "login");
 
             Assert.IsFalse(result.Success);
         }

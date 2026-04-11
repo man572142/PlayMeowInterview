@@ -151,6 +151,7 @@ namespace PlayMeow.Network
     public class GraphQLData
     {
         public AuthPayload login;
+        public AuthPayload signup;
         public GraphQLUser me;
     }
 
