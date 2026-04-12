@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: PlayMeowStringTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: PlayMeowStringTable
+  m_TableCollectionNameGuidString: b34a8793f3a311c45bb0dd67e5a67e8b
+  m_Entries:
+  - m_Id: 1
+    m_Key: login_heading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2
+    m_Key: login_divider
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3
+    m_Key: login_forgot_password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4
+    m_Key: login_privacy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5
+    m_Key: login_terms
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6
+    m_Key: login_btn_signin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7
+    m_Key: login_btn_signup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8
+    m_Key: login_error_confirm_password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9
+    m_Key: login_error_password_mismatch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10
+    m_Key: login_error_fill_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11
+    m_Key: login_error_network
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12
+    m_Key: login_error_session_expired
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13
+    m_Key: login_error_google_not_implemented
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14
+    m_Key: login_error_wrong_credentials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15
+    m_Key: login_error_signup_failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16
+    m_Key: login_placeholder_password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17
+    m_Key: login_placeholder_confirm_password
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4946508485056004120
+  references:
+    version: 2
+    RefIds:
+    - rid: 4946508485056004120
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1776003453535

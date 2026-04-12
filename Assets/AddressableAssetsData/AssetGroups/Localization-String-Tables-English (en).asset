@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: f38c189d03397094181ea431207ed33c
   m_SerializeEntries:
   - m_GUID: 0ec3f2f6a1d6fae4294940e16c7b07a0
-    m_Address: StringTable_en
+    m_Address: PlayMeowStringTable_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: PlayMeowStringTable
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: b34a8793f3a311c45bb0dd67e5a67e8b, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 0ec3f2f6a1d6fae4294940e16c7b07a0, type: 2}
+  - {fileID: 11400000, guid: 95741376251ee1541a98468d55637826, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

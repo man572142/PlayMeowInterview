@@ -42,7 +42,7 @@ namespace PlayMeow.Auth
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                return LoginResult.Fail("請填寫帳號和密碼");
+                return LoginResult.Fail("login_error_fill_required");
             }
 
             const string query = @"
@@ -75,7 +75,7 @@ namespace PlayMeow.Auth
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                return LoginResult.Fail("請填寫帳號和密碼");
+                return LoginResult.Fail("login_error_fill_required");
             }
 
             const string query = @"
@@ -120,14 +120,14 @@ namespace PlayMeow.Auth
             if (!string.IsNullOrEmpty(response.networkError))
             {
                 Debug.LogWarning($"[AuthService] Auto-login network error: {response.networkError}");
-                return LoginResult.Fail("網路連線失敗");
+                return LoginResult.Fail("login_error_network");
             }
 
             if (response.HasErrors || response.data?.me == null)
             {
                 Debug.Log("[AuthService] Stored token is invalid; clearing.");
                 TokenStore.Clear();
-                return LoginResult.Fail("登入已過期，請重新登入");
+                return LoginResult.Fail("login_error_session_expired");
             }
 
             CurrentToken = token;
@@ -151,7 +151,7 @@ namespace PlayMeow.Auth
         {
             await Task.Yield();
             Debug.Log("[AuthService] Google login not yet implemented.");
-            return LoginResult.Fail("Google 登入尚未實作");
+            return LoginResult.Fail("login_error_google_not_implemented");
         }
 
         // -----------------------------------------------------------------------
@@ -174,10 +174,10 @@ namespace PlayMeow.Auth
             if (!string.IsNullOrEmpty(response.networkError))
             {
                 Debug.LogWarning($"[AuthService] Network error: {response.networkError}");
-                return LoginResult.Fail("網路連線失敗");
+                return LoginResult.Fail("login_error_network");
             }
 
-            string defaultError = operation == "signup" ? "註冊失敗" : "帳號或密碼錯誤";
+            string defaultError = operation == "signup" ? "login_error_signup_failed" : "login_error_wrong_credentials";
 
             // GraphQL returns HTTP 200 even on auth failure; always check errors[].
             if (response.HasErrors)

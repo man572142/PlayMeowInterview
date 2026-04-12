@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-String-Tables-Chinese (Traditional) (zh-TW)
+  m_Name: Localization-Asset-Tables-English (en)
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-String-Tables-Chinese (Traditional) (zh-TW)
+  m_GroupName: Localization-Asset-Tables-English (en)
   m_Data:
     m_SerializedData: []
-  m_GUID: 172c513e9e346b44e9f396dcae62e8b6
+  m_GUID: 278fdbac1f951504498450241763e5c1
   m_SerializeEntries:
-  - m_GUID: 95741376251ee1541a98468d55637826
-    m_Address: PlayMeowStringTable_zh-TW
+  - m_GUID: a5de7a38c780dd44d85c290c74934074
+    m_Address: UITable_en
     m_ReadOnly: 1
     m_SerializedLabels:
-    - Locale-zh-TW
+    - Locale-en
     - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: e5395c124fc86bf42bc2e541df0a0b87, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 0e329be51742e894b94ee164df937fd4, type: 2}
-    - {fileID: 11400000, guid: 1d6f4385d5c9dc449ae95e62695c2829, type: 2}
+    - {fileID: 11400000, guid: 8a9f5467327200744906f2eef573d9e9, type: 2}
+    - {fileID: 11400000, guid: 4cc5d82ac0d72d34d85b284f5fd211af, type: 2}

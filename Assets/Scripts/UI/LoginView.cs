@@ -4,6 +4,8 @@ using PlayMeow.Auth;
 using PlayMeowInterview.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -36,6 +38,9 @@ namespace PlayMeow.UI
         [SerializeField] private TextMeshProUGUI inputHintText;
         [SerializeField] private TextMeshProUGUI errorText;
         [SerializeField] private UIShake errorTextShake;
+        
+        [Space]
+        [SerializeField] private LocalizedStringTable localizedStringTable;
 
         private AuthMode currentAuthMode = AuthMode.Login;
 
@@ -52,10 +57,13 @@ namespace PlayMeow.UI
             emailInput.onValueChanged.AddListener(OnInputValueChanged);
             passwordInput.onValueChanged.AddListener(OnInputValueChanged);
             confirmPasswordInput.onValueChanged.AddListener(OnInputValueChanged);
+            
+            LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
 
             HideError();
             UpdateEmptyInputsText();
             SetAuthMode(currentAuthMode);
+
         }
 
         private void OnDestroy()
@@ -71,6 +79,8 @@ namespace PlayMeow.UI
             emailInput.onValueChanged.RemoveListener(OnInputValueChanged);
             passwordInput.onValueChanged.RemoveListener(OnInputValueChanged);
             confirmPasswordInput.onValueChanged.RemoveListener(OnInputValueChanged);
+            
+            LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
         }
 
         private void OnInputValueChanged(string _)
@@ -100,11 +110,11 @@ namespace PlayMeow.UI
                 case AuthMode.SignUp:
                     if (string.IsNullOrEmpty(confirmPasswordInput.text))
                     {
-                        ShowError("請確認密碼");
+                        ShowError(Localize("login_error_confirm_password"));
                     }
                     else if (passwordInput.text != confirmPasswordInput.text)
                     {
-                        ShowError("密碼不一致");
+                        ShowError(Localize("login_error_password_mismatch"));
                     }
                     else
                     {
@@ -141,7 +151,7 @@ namespace PlayMeow.UI
             }
             else
             {
-                ShowError(result.ErrorMessage);
+                ShowError(Localize(result.ErrorMessage));
             }
         }
 
@@ -164,15 +174,15 @@ namespace PlayMeow.UI
 
             switchAuthModeButtonText.text = mode switch
             {
-                AuthMode.Login => "註冊新帳號",
-                AuthMode.SignUp => "登入",
+                AuthMode.Login => Localize("login_btn_signup"),
+                AuthMode.SignUp => Localize("login_btn_signin"),
                 _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
             };
 
             authButtonText.text = mode switch
             {
-                AuthMode.Login => "登入",
-                AuthMode.SignUp => "註冊新帳號",
+                AuthMode.Login => Localize("login_btn_signin"),
+                AuthMode.SignUp => Localize("login_btn_signup"),
                 _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
             };
         }
@@ -229,6 +239,16 @@ namespace PlayMeow.UI
         private void OnLoginSuccess(string token)
         {
             // TODO: store token and navigate to main scene
+        }
+
+        private string Localize(string key)
+        {
+            return LocalizationSettings.StringDatabase.GetLocalizedString(localizedStringTable.TableReference, key);
+        }
+        
+        private void OnSelectedLocaleChanged(Locale locale)
+        {
+            HideError();
         }
     }
 }
