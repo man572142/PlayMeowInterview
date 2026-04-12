@@ -18,6 +18,7 @@ namespace PlayMeow.UI
         [SerializeField] private Button forgotPasswordButton;
         [SerializeField] private Button registerButton;
         [SerializeField] private Button closeButton;
+        [SerializeField] private SpriteToggleButton passwordVisibilityButton;
 
         [Header("Feedback")]
         [SerializeField] private TextMeshProUGUI inputHintText;
@@ -33,6 +34,7 @@ namespace PlayMeow.UI
 
             emailInput.onValueChanged.AddListener(OnInputValueChanged);
             passwordInput.onValueChanged.AddListener(OnInputValueChanged);
+            passwordVisibilityButton.OnValueChanged += SetPasswordVisible;
 
             HideError();
             UpdateEmptyInputsText();
@@ -48,6 +50,7 @@ namespace PlayMeow.UI
 
             emailInput.onValueChanged.RemoveListener(OnInputValueChanged);
             passwordInput.onValueChanged.RemoveListener(OnInputValueChanged);
+            passwordVisibilityButton.OnValueChanged -= SetPasswordVisible;
         }
 
         private void OnInputValueChanged(string _)
@@ -151,6 +154,14 @@ namespace PlayMeow.UI
             googleLoginButton.interactable = interactable;
             emailInput.interactable = interactable;
             passwordInput.interactable = interactable;
+        }
+
+        public void SetPasswordVisible(bool visible)
+        {
+            passwordInput.inputType = visible
+                ? TMP_InputField.InputType.Standard
+                : TMP_InputField.InputType.Password;
+            passwordInput.ForceLabelUpdate();
         }
 
         private void OnLoginSuccess(string token)
