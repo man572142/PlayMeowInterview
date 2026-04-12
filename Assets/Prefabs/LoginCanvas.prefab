@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 1524559237354565705}
   - component: {fileID: 9113201886244940524}
   - component: {fileID: 3710326539035015775}
+  - component: {fileID: 8220387917917083906}
   m_Layer: 0
   m_Name: TMP_ErrorMessage
   m_TagString: Untagged
@@ -278,6 +279,32 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8220387917917083906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030265919430437820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b5c7a966eccb14aa21829a85fafd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionShake:
+    enabled: 1
+    duration: 0.5
+    strength: {x: 10, y: 10, z: 10}
+    vibrato: 30
+    randomness: 90
+    fadeOut: 1
+  rotationShake:
+    enabled: 1
+    duration: 0.5
+    strength: {x: 0, y: 0, z: 5}
+    vibrato: 30
+    randomness: 90
+    fadeOut: 1
 --- !u!1 &2954480289681914786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,7 +1229,7 @@ GameObject:
   - component: {fileID: 2954480290593339570}
   - component: {fileID: 2954480290593339571}
   m_Layer: 0
-  m_Name: Button_Login
+  m_Name: Button_Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1788,7 +1815,7 @@ MonoBehaviour:
   emailInput: {fileID: 2954480290949046706}
   passwordInput: {fileID: 2324912175259893586}
   confirmPasswordInput: {fileID: 2525562577908649256}
-  AuthButton: {fileID: 2954480290593339570}
+  authButton: {fileID: 2954480290593339570}
   authButtonText: {fileID: 2954480290954600482}
   googleLoginButton: {fileID: 2954480291524510240}
   forgotPasswordButton: {fileID: 2954480291559528087}
@@ -1801,6 +1828,7 @@ MonoBehaviour:
   privacyPolicyUrl: https://playmeow.com/privacy
   inputHintText: {fileID: 2954480290683716912}
   errorText: {fileID: 3710326539035015775}
+  errorTextShake: {fileID: 8220387917917083906}
 --- !u!1 &2954480290912163111
 GameObject:
   m_ObjectHideFlags: 0

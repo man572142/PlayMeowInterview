@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using PlayMeow.Auth;
+using PlayMeowInterview.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -34,6 +35,7 @@ namespace PlayMeow.UI
         [Header("Feedback")]
         [SerializeField] private TextMeshProUGUI inputHintText;
         [SerializeField] private TextMeshProUGUI errorText;
+        [SerializeField] private UIShake errorTextShake;
 
         private AuthMode currentAuthMode = AuthMode.Login;
 
@@ -199,6 +201,7 @@ namespace PlayMeow.UI
 
             errorText.text = msg;
             errorText.enabled = true;
+            errorTextShake.Shake();
         }
 
         private void HideError()
