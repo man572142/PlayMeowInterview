@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using PlayMeow.Auth;
 using TMPro;
 using UnityEngine;
@@ -65,34 +66,23 @@ namespace PlayMeow.UI
             inputHintText.enabled = string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text);
         }
 
-        private async void OnLoginClicked()
+        private void OnLoginClicked() =>
+            ExecuteLogin(() => AuthService.Instance.LoginAsync(emailInput.text, passwordInput.text));
+
+        private void OnGoogleLoginClicked() =>
+            ExecuteLogin(() => AuthService.Instance.GoogleLoginAsync());
+
+        private async void ExecuteLogin(Func<Task<LoginResult>> loginFunc)
         {
             HideError();
             SetInteractable(false);
 
-            var result = await AuthService.Instance.LoginAsync(
-                emailInput.text,
-                passwordInput.text
-            );
+            var result = await loginFunc();
 
-            SetInteractable(true);
-
-            if (result.Success)
+            if (this == null)
             {
-                OnLoginSuccess(result.Token);
+                return;
             }
-            else
-            {
-                ShowError(result.ErrorMessage);
-            }
-        }
-
-        private async void OnGoogleLoginClicked()
-        {
-            HideError();
-            SetInteractable(false);
-
-            var result = await AuthService.Instance.GoogleLoginAsync();
 
             SetInteractable(true);
 
@@ -108,19 +98,16 @@ namespace PlayMeow.UI
 
         private void OnForgotPasswordClicked()
         {
-            Debug.Log("[LoginView] Forgot password tapped.");
             // TODO: navigate to forgot-password screen
         }
 
         private void OnRegisterClicked()
         {
-            Debug.Log("[LoginView] Register tapped.");
             // TODO: navigate to registration screen
         }
 
         private void OnCloseClicked()
         {
-            Debug.Log("[LoginView] Close tapped.");
             gameObject.SetActive(false);
         }
 
@@ -155,7 +142,6 @@ namespace PlayMeow.UI
 
         private void OnLoginSuccess(string token)
         {
-            Debug.Log($"[LoginView] Login successful. Token: {token}");
             // TODO: store token and navigate to main scene
         }
     }

@@ -46,11 +46,9 @@ namespace PlayMeow.Network
                 request.SetRequestHeader("Authorization", $"Bearer {authToken}");
             }
 
-            var op = request.SendWebRequest();
-            while (!op.isDone)
-            {
-                await Task.Yield();
-            }
+            var tcs = new TaskCompletionSource<bool>();
+            request.SendWebRequest().completed += _ => tcs.SetResult(true);
+            await tcs.Task;
 
             if (request.result != UnityWebRequest.Result.Success)
             {
@@ -59,7 +57,9 @@ namespace PlayMeow.Network
             }
 
             string responseText = request.downloadHandler.text;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
             Debug.Log($"[GraphQLClient] Response: {responseText}");
+#endif
 
             var response = JsonUtility.FromJson<GraphQLResponse>(responseText);
             if (response == null)

@@ -17,7 +17,6 @@ namespace PlayMeow.Auth
 
         private readonly GraphQLClient _client;
 
-        // Publicly readable after a successful login/auto-login.
         public string CurrentToken { get; private set; }
         public UserInfo CurrentUser { get; private set; }
 
@@ -76,7 +75,7 @@ namespace PlayMeow.Auth
         public async Task<LoginResult> AutoLoginAsync()
         {
             string token = TokenStore.Load();
-            if (string.IsNullOrEmpty(token))
+            if (token == null)
             {
                 return LoginResult.Fail("No stored token");
             }
@@ -98,7 +97,6 @@ namespace PlayMeow.Auth
                 return LoginResult.Fail("登入已過期，請重新登入");
             }
 
-            // Token is still valid — restore session state.
             CurrentToken = token;
             CurrentUser = new UserInfo
             {
