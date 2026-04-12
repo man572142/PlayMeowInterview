@@ -19,6 +19,12 @@ namespace PlayMeow.UI
         [SerializeField] private Button registerButton;
         [SerializeField] private Button closeButton;
         [SerializeField] private SpriteToggleButton passwordVisibilityButton;
+        [SerializeField] private Button privacyPolicyButton;
+        [SerializeField] private Button termsOfServiceButton;
+        
+        [Header("URLs")]
+        [SerializeField] private string termsOfServiceUrl;
+        [SerializeField] private string privacyPolicyUrl;
 
         [Header("Feedback")]
         [SerializeField] private TextMeshProUGUI inputHintText;
@@ -31,6 +37,8 @@ namespace PlayMeow.UI
             forgotPasswordButton.onClick.AddListener(OnForgotPasswordClicked);
             registerButton.onClick.AddListener(OnRegisterClicked);
             closeButton.onClick.AddListener(OnCloseClicked);
+            privacyPolicyButton.onClick.AddListener(OpenPrivacyPolicy);
+            termsOfServiceButton.onClick.AddListener(OpenTermsOfService);
 
             emailInput.onValueChanged.AddListener(OnInputValueChanged);
             passwordInput.onValueChanged.AddListener(OnInputValueChanged);
@@ -47,6 +55,8 @@ namespace PlayMeow.UI
             forgotPasswordButton.onClick.RemoveListener(OnForgotPasswordClicked);
             registerButton.onClick.RemoveListener(OnRegisterClicked);
             closeButton.onClick.RemoveListener(OnCloseClicked);
+            privacyPolicyButton.onClick.RemoveListener(OpenPrivacyPolicy);
+            termsOfServiceButton.onClick.RemoveListener(OpenTermsOfService);
 
             emailInput.onValueChanged.RemoveListener(OnInputValueChanged);
             passwordInput.onValueChanged.RemoveListener(OnInputValueChanged);
@@ -125,6 +135,17 @@ namespace PlayMeow.UI
         {
             Debug.Log("[LoginView] Close tapped.");
             gameObject.SetActive(false);
+        }
+        
+        private void OpenTermsOfService()
+        {
+            Debug.Log("[LoginView] Terms of service tapped.");
+            Application.OpenURL(termsOfServiceUrl);
+        }
+
+        private void OpenPrivacyPolicy()
+        {
+            Application.OpenURL(privacyPolicyUrl);
         }
 
         private void ShowError(string msg)

@@ -153,7 +153,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1524559237354565705}
   - component: {fileID: 9113201886244940524}
-  - component: {fileID: 9048529419890608900}
   - component: {fileID: 3710326539035015775}
   m_Layer: 0
   m_Name: TMP_ErrorMessage
@@ -190,26 +189,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030265919430437820}
   m_CullTransparentMesh: 1
---- !u!114 &9048529419890608900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030265919430437820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: 36
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!114 &3710326539035015775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,9 +657,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2954480290023816518}
   - component: {fileID: 2954480290023816514}
-  - component: {fileID: 2954480290023816515}
+  - component: {fileID: 2470028058111460640}
   - component: {fileID: 2954480290023816512}
-  - component: {fileID: 2954480290023816513}
   m_Layer: 0
   m_Name: TMP_Privacy
   m_TagString: Untagged
@@ -716,7 +694,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2954480290023816519}
   m_CullTransparentMesh: 1
---- !u!114 &2954480290023816515
+--- !u!114 &2470028058111460640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -845,30 +823,10 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2954480290023816515}
+  m_TargetGraphic: {fileID: 2470028058111460640}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2954480290023816513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954480290023816519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: 36
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &2954480290116298321
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,7 +915,6 @@ GameObject:
   - component: {fileID: 2954480290199429100}
   - component: {fileID: 2954480290199429101}
   - component: {fileID: 2954480290199429090}
-  - component: {fileID: 2954480290199429091}
   m_Layer: 0
   m_Name: TMP_Terms
   m_TagString: Untagged
@@ -1126,26 +1083,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2954480290199429091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954480290199429089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: 36
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &2954480290265567187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,7 +1499,6 @@ GameObject:
   - component: {fileID: 2954480290814792796}
   - component: {fileID: 2954480290814792797}
   - component: {fileID: 2954480290814792786}
-  - component: {fileID: 2954480290814792787}
   m_Layer: 0
   m_Name: TMP_Register
   m_TagString: Untagged
@@ -1588,7 +1524,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2954480290814792796
 CanvasRenderer:
@@ -1731,26 +1667,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2954480290814792787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954480290814792785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: 36
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &2954480290845519476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1793,10 @@ MonoBehaviour:
   registerButton: {fileID: 2954480290814792786}
   closeButton: {fileID: 2954480289778379871}
   passwordVisibilityButton: {fileID: 4091619928031633233}
+  privacyPolicyButton: {fileID: 2954480290023816512}
+  termsOfServiceButton: {fileID: 2954480290199429090}
+  termsOfServiceUrl: https://playmeow.com/zh-TW/terms
+  privacyPolicyUrl: https://playmeow.com/privacy
   inputHintText: {fileID: 2954480290683716912}
   errorText: {fileID: 3710326539035015775}
 --- !u!1 &2954480290912163111
@@ -2180,7 +2100,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2954480291043078543}
   - component: {fileID: 2954480291043078536}
-  - component: {fileID: 2954480291043078537}
   - component: {fileID: 2954480291043078542}
   m_Layer: 0
   m_Name: Panel_Footer
@@ -2219,36 +2138,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2954480291043078540}
   m_CullTransparentMesh: 1
---- !u!114 &2954480291043078537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954480291043078540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &2954480291043078542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2268,8 +2157,8 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 3
   m_Spacing: 0
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
@@ -2555,7 +2444,6 @@ GameObject:
   - component: {fileID: 2954480291559528081}
   - component: {fileID: 2954480291559528086}
   - component: {fileID: 2954480291559528087}
-  - component: {fileID: 2954480291559528084}
   m_Layer: 0
   m_Name: TMP_ForgotPassword
   m_TagString: Untagged
@@ -2581,7 +2469,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2954480291559528081
 CanvasRenderer:
@@ -2724,26 +2612,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2954480291559528084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954480291559528170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: 36
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &2954480291729239538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,7 +2622,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2954480291729239549}
   - component: {fileID: 2954480291729239545}
-  - component: {fileID: 2954480291729239550}
   - component: {fileID: 2954480291729239551}
   m_Layer: 0
   m_Name: Group_Links
@@ -2793,36 +2660,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2954480291729239538}
   m_CullTransparentMesh: 1
---- !u!114 &2954480291729239550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2954480291729239538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &2954480291729239551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,10 +2679,10 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 0
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -2929,7 +2766,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6322702831958452362}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
