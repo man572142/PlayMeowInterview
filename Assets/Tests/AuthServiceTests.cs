@@ -66,6 +66,28 @@ namespace PlayMeow.Tests
         }
 
         [UnityTest]
+        public IEnumerator SignupAsync_EmptyUsername_ReturnsFail()
+        {
+            var task = _service.SignupAsync("", "password");
+            yield return WaitForTask(task);
+            var result = task.Result;
+
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.ErrorMessage);
+        }
+
+        [UnityTest]
+        public IEnumerator SignupAsync_EmptyPassword_ReturnsFail()
+        {
+            var task = _service.SignupAsync("user@example.com", "");
+            yield return WaitForTask(task);
+            var result = task.Result;
+
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.ErrorMessage);
+        }
+
+        [UnityTest]
         public IEnumerator GoogleLoginAsync_ReturnsNotImplementedFail()
         {
             var task = _service.GoogleLoginAsync();

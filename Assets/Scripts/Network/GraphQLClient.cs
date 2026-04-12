@@ -58,7 +58,7 @@ namespace PlayMeow.Network
 
             string responseText = request.downloadHandler.text;
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
-            Debug.Log($"[GraphQLClient] <color=green>Login Successfully!</color> Response: {responseText}");
+            Debug.Log($"[GraphQLClient] Response received: {responseText}");
 #endif
 
             var response = JsonUtility.FromJson<GraphQLResponse>(responseText);

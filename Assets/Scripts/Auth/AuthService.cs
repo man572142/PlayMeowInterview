@@ -74,7 +74,9 @@ namespace PlayMeow.Auth
         public async Task<LoginResult> SignupAsync(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
                 return LoginResult.Fail("請填寫帳號和密碼");
+            }
 
             const string query = @"
                 mutation Signup($username: String!, $password: String!) {

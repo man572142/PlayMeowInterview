@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using PlayMeow.Auth;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace PlayMeow.UI
@@ -15,7 +16,8 @@ namespace PlayMeow.UI
         [SerializeField] private TMP_InputField confirmPasswordInput;
 
         [Header("Buttons")]
-        [SerializeField] private Button AuthButton;
+        [FormerlySerializedAs("authButton")]
+        [SerializeField] private Button authButton;
         [SerializeField] private TMP_Text authButtonText;
         [SerializeField] private Button googleLoginButton;
         [SerializeField] private Button forgotPasswordButton;
@@ -24,7 +26,7 @@ namespace PlayMeow.UI
         [SerializeField] private Button closeButton;
         [SerializeField] private Button privacyPolicyButton;
         [SerializeField] private Button termsOfServiceButton;
-        
+
         [Header("URLs")]
         [SerializeField] private string termsOfServiceUrl;
         [SerializeField] private string privacyPolicyUrl;
@@ -32,12 +34,12 @@ namespace PlayMeow.UI
         [Header("Feedback")]
         [SerializeField] private TextMeshProUGUI inputHintText;
         [SerializeField] private TextMeshProUGUI errorText;
-        
+
         private AuthMode currentAuthMode = AuthMode.Login;
 
         private void Awake()
         {
-            AuthButton.onClick.AddListener(OnAuthClicked);
+            authButton.onClick.AddListener(OnAuthClicked);
             googleLoginButton.onClick.AddListener(OnGoogleLoginClicked);
             forgotPasswordButton.onClick.AddListener(OnForgotPasswordClicked);
             switchAuthModeButton.onClick.AddListener(SwitchAuthMode);
@@ -47,6 +49,7 @@ namespace PlayMeow.UI
 
             emailInput.onValueChanged.AddListener(OnInputValueChanged);
             passwordInput.onValueChanged.AddListener(OnInputValueChanged);
+            confirmPasswordInput.onValueChanged.AddListener(OnInputValueChanged);
 
             HideError();
             UpdateEmptyInputsText();
@@ -55,7 +58,7 @@ namespace PlayMeow.UI
 
         private void OnDestroy()
         {
-            AuthButton.onClick.RemoveListener(OnAuthClicked);
+            authButton.onClick.RemoveListener(OnAuthClicked);
             googleLoginButton.onClick.RemoveListener(OnGoogleLoginClicked);
             forgotPasswordButton.onClick.RemoveListener(OnForgotPasswordClicked);
             switchAuthModeButton.onClick.RemoveListener(SwitchAuthMode);
@@ -65,6 +68,7 @@ namespace PlayMeow.UI
 
             emailInput.onValueChanged.RemoveListener(OnInputValueChanged);
             passwordInput.onValueChanged.RemoveListener(OnInputValueChanged);
+            confirmPasswordInput.onValueChanged.RemoveListener(OnInputValueChanged);
         }
 
         private void OnInputValueChanged(string _)
@@ -79,7 +83,9 @@ namespace PlayMeow.UI
                 return;
             }
 
-            inputHintText.enabled = string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text);
+            bool missingRequired = string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text);
+            bool missingConfirm = currentAuthMode == AuthMode.SignUp && string.IsNullOrEmpty(confirmPasswordInput.text);
+            inputHintText.enabled = missingRequired || missingConfirm;
         }
 
         private void OnAuthClicked()
@@ -90,7 +96,11 @@ namespace PlayMeow.UI
                     ExecuteLogin(() => AuthService.Instance.LoginAsync(emailInput.text, passwordInput.text));
                     break;
                 case AuthMode.SignUp:
-                    if (passwordInput.text != confirmPasswordInput.text)
+                    if (string.IsNullOrEmpty(confirmPasswordInput.text))
+                    {
+                        ShowError("請確認密碼");
+                    }
+                    else if (passwordInput.text != confirmPasswordInput.text)
                     {
                         ShowError("密碼不一致");
                     }
@@ -147,7 +157,7 @@ namespace PlayMeow.UI
         private void SetAuthMode(AuthMode mode)
         {
             currentAuthMode = mode;
-            
+
             confirmPasswordInput.gameObject.SetActive(mode == AuthMode.SignUp);
 
             switchAuthModeButtonText.text = mode switch
@@ -169,7 +179,7 @@ namespace PlayMeow.UI
         {
             gameObject.SetActive(false);
         }
-        
+
         private void OpenTermsOfService()
         {
             Application.OpenURL(termsOfServiceUrl);
@@ -203,11 +213,14 @@ namespace PlayMeow.UI
 
         private void SetInteractable(bool interactable)
         {
-            AuthButton.interactable = interactable;
+            authButton.interactable = interactable;
             googleLoginButton.interactable = interactable;
             emailInput.interactable = interactable;
             passwordInput.interactable = interactable;
-            confirmPasswordInput.interactable = interactable;
+            if (currentAuthMode == AuthMode.SignUp)
+            {
+                confirmPasswordInput.interactable = interactable;
+            }
         }
 
         private void OnLoginSuccess(string token)

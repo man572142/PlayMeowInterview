@@ -7,7 +7,7 @@ namespace PlayMeow.UI
     public class SpriteToggleButton : MonoBehaviour
     {
         public event Action<bool> OnValueChanged;
-        
+
         [Header("Button")]
         [SerializeField] private Button button;
 
