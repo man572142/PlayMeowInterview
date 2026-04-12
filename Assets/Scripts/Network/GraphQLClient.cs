@@ -74,7 +74,7 @@ namespace PlayMeow.Network
         // JSON helpers (avoid Newtonsoft dependency)
         // ---------------------------------------------------------------------------
 
-        private static string BuildRequestJson(string query, Dictionary<string, string> variables)
+        internal static string BuildRequestJson(string query, Dictionary<string, string> variables)
         {
             var sb = new StringBuilder();
             sb.Append("{\"query\":");

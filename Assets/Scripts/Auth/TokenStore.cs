@@ -7,7 +7,7 @@ namespace PlayMeow.Auth
     /// </summary>
     public static class TokenStore
     {
-        private const string TokenKey = "pm_auth_token";
+        public const string TokenKey = "pm_auth_token";
 
         /// <summary>Save the token to PlayerPrefs.</summary>
         public static void Save(string token)

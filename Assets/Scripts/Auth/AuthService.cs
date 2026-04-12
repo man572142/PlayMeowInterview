@@ -26,6 +26,11 @@ namespace PlayMeow.Auth
             _client = new GraphQLClient();
         }
 
+        internal AuthService(GraphQLClient client)
+        {
+            _client = client;
+        }
+
         // -----------------------------------------------------------------------
         // Login
         // -----------------------------------------------------------------------
@@ -133,7 +138,7 @@ namespace PlayMeow.Auth
         // Helpers
         // -----------------------------------------------------------------------
 
-        private LoginResult ProcessAuthResponse(GraphQLResponse response)
+        internal LoginResult ProcessAuthResponse(GraphQLResponse response)
         {
             if (!string.IsNullOrEmpty(response.networkError))
             {
