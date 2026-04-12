@@ -1,4 +1,4 @@
-namespace PlayMeow.UI
+namespace PlayMeow.Auth
 {
     public enum AuthMode
     {

@@ -60,7 +60,7 @@ namespace PlayMeow.Auth
             };
 
             GraphQLResponse response = await _client.QueryAsync(query, variables);
-            return ProcessAuthResponse(response, "login");
+            return ProcessAuthResponse(response, AuthMode.Login);
         }
 
         // -----------------------------------------------------------------------
@@ -93,7 +93,7 @@ namespace PlayMeow.Auth
             };
 
             GraphQLResponse response = await _client.QueryAsync(query, variables);
-            return ProcessAuthResponse(response, "signup");
+            return ProcessAuthResponse(response, AuthMode.SignUp);
         }
 
         // -----------------------------------------------------------------------
@@ -169,7 +169,7 @@ namespace PlayMeow.Auth
         // Helpers
         // -----------------------------------------------------------------------
 
-        internal LoginResult ProcessAuthResponse(GraphQLResponse response, string operation)
+        internal LoginResult ProcessAuthResponse(GraphQLResponse response, AuthMode mode)
         {
             if (!string.IsNullOrEmpty(response.networkError))
             {
@@ -177,7 +177,7 @@ namespace PlayMeow.Auth
                 return LoginResult.Fail("網路連線失敗");
             }
 
-            string defaultError = operation == "signup" ? "註冊失敗" : "帳號或密碼錯誤";
+            string defaultError = mode == AuthMode.SignUp ? "註冊失敗" : "帳號或密碼錯誤";
 
             // GraphQL returns HTTP 200 even on auth failure; always check errors[].
             if (response.HasErrors)
@@ -187,14 +187,14 @@ namespace PlayMeow.Auth
                 return LoginResult.Fail(defaultError);
             }
 
-            AuthPayload payload = operation == "signup"
+            AuthPayload payload = mode == AuthMode.SignUp
                 ? response.data?.signup
                 : response.data?.login;
 
             string token = payload?.token;
             if (string.IsNullOrEmpty(token))
             {
-                Debug.LogWarning($"[AuthService] {operation} succeeded but token was empty.");
+                Debug.LogWarning($"[AuthService] {mode} succeeded but token was empty.");
                 return LoginResult.Fail(defaultError);
             }
 
