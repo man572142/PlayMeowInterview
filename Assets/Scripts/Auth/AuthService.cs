@@ -19,7 +19,7 @@ namespace PlayMeow.Auth
 
         // Publicly readable after a successful login/auto-login.
         public string CurrentToken { get; private set; }
-        public UserInfo CurrentUser  { get; private set; }
+        public UserInfo CurrentUser { get; private set; }
 
         private AuthService()
         {
@@ -37,7 +37,9 @@ namespace PlayMeow.Auth
         public async Task<LoginResult> LoginAsync(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
                 return LoginResult.Fail("請填寫帳號和密碼");
+            }
 
             const string query = @"
                 mutation Login($username: String!, $password: String!) {
@@ -70,7 +72,9 @@ namespace PlayMeow.Auth
         {
             string token = TokenStore.Load();
             if (string.IsNullOrEmpty(token))
+            {
                 return LoginResult.Fail("No stored token");
+            }
 
             const string query = "{ me { id username } }";
 
@@ -91,9 +95,9 @@ namespace PlayMeow.Auth
 
             // Token is still valid — restore session state.
             CurrentToken = token;
-            CurrentUser  = new UserInfo
+            CurrentUser = new UserInfo
             {
-                Id       = response.data.me.id,
+                Id = response.data.me.id,
                 Username = response.data.me.username
             };
 
@@ -121,7 +125,7 @@ namespace PlayMeow.Auth
         public void Logout()
         {
             CurrentToken = null;
-            CurrentUser  = null;
+            CurrentUser = null;
             TokenStore.Clear();
         }
 
@@ -158,7 +162,7 @@ namespace PlayMeow.Auth
                 : null;
 
             CurrentToken = token;
-            CurrentUser  = user;
+            CurrentUser = user;
             TokenStore.Save(token);
 
             return LoginResult.Ok(token, user);

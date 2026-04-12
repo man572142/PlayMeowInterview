@@ -50,12 +50,18 @@ namespace PlayMeow.UI
             passwordInput.onValueChanged.RemoveListener(OnInputValueChanged);
         }
 
-        private void OnInputValueChanged(string _) => UpdateEmptyInputsText();
+        private void OnInputValueChanged(string _)
+        {
+            UpdateEmptyInputsText();
+        }
 
         private void UpdateEmptyInputsText()
         {
-            if (inputHintText == null) return;
-            
+            if (inputHintText == null)
+            {
+                return;
+            }
+
             inputHintText.enabled = string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text);
         }
 
@@ -64,7 +70,7 @@ namespace PlayMeow.UI
             HideError();
             SetInteractable(false);
 
-            LoginResult result = await AuthService.Instance.LoginAsync(
+            var result = await AuthService.Instance.LoginAsync(
                 emailInput.text,
                 passwordInput.text
             );
@@ -72,9 +78,13 @@ namespace PlayMeow.UI
             SetInteractable(true);
 
             if (result.Success)
+            {
                 OnLoginSuccess(result.Token);
+            }
             else
+            {
                 ShowError(result.ErrorMessage);
+            }
         }
 
         private async void OnGoogleLoginClicked()
@@ -82,14 +92,18 @@ namespace PlayMeow.UI
             HideError();
             SetInteractable(false);
 
-            LoginResult result = await AuthService.Instance.GoogleLoginAsync();
+            var result = await AuthService.Instance.GoogleLoginAsync();
 
             SetInteractable(true);
 
             if (result.Success)
+            {
                 OnLoginSuccess(result.Token);
+            }
             else
+            {
                 ShowError(result.ErrorMessage);
+            }
         }
 
         private void OnForgotPasswordClicked()
@@ -112,14 +126,22 @@ namespace PlayMeow.UI
 
         private void ShowError(string msg)
         {
-            if (errorText == null) return;
+            if (errorText == null)
+            {
+                return;
+            }
+
             errorText.text = msg;
             errorText.enabled = true;
         }
 
         private void HideError()
         {
-            if (errorText == null) return;
+            if (errorText == null)
+            {
+                return;
+            }
+
             errorText.enabled = false;
         }
 

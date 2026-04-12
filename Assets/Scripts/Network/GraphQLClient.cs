@@ -37,16 +37,20 @@ namespace PlayMeow.Network
 
             using var request = new UnityWebRequest(_endpoint, "POST");
             byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
-            request.uploadHandler   = new UploadHandlerRaw(bytes);
+            request.uploadHandler = new UploadHandlerRaw(bytes);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
             if (!string.IsNullOrEmpty(authToken))
+            {
                 request.SetRequestHeader("Authorization", $"Bearer {authToken}");
+            }
 
             var op = request.SendWebRequest();
             while (!op.isDone)
+            {
                 await Task.Yield();
+            }
 
             if (request.result != UnityWebRequest.Result.Success)
             {
@@ -59,7 +63,9 @@ namespace PlayMeow.Network
 
             var response = JsonUtility.FromJson<GraphQLResponse>(responseText);
             if (response == null)
+            {
                 return new GraphQLResponse { networkError = "Failed to parse response" };
+            }
 
             return response;
         }
@@ -80,7 +86,11 @@ namespace PlayMeow.Network
                 bool first = true;
                 foreach (var kv in variables)
                 {
-                    if (!first) sb.Append(',');
+                    if (!first)
+                    {
+                        sb.Append(',');
+                    }
+
                     sb.Append(JsonString(kv.Key));
                     sb.Append(':');
                     sb.Append(JsonString(kv.Value));
@@ -96,7 +106,11 @@ namespace PlayMeow.Network
         /// <summary>Wrap a string in double-quotes and escape special characters.</summary>
         internal static string JsonString(string s)
         {
-            if (s == null) return "null";
+            if (s == null)
+            {
+                return "null";
+            }
+
             return "\"" + s
                 .Replace("\\", "\\\\")
                 .Replace("\"", "\\\"")
