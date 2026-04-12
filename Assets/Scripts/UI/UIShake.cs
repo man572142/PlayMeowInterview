@@ -10,9 +10,9 @@ namespace PlayMeowInterview.UI
         public bool enabled;
         public float duration;
         public Vector3 strength;
-        [Range(1, 50)] 
+        [Range(1, 50)]
         public int vibrato;
-        [Range(0f, 180f)] 
+        [Range(0f, 180f)]
         public float randomness;
         public bool fadeOut;
     }

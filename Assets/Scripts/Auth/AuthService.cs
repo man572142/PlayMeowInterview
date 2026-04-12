@@ -12,6 +12,8 @@ namespace PlayMeow.Auth
     /// </summary>
     public class AuthService
     {
+        private const string Username = "username";
+        private const string Password = "password";
         private static AuthService _instance;
         public static AuthService Instance => _instance ??= new AuthService();
 
@@ -55,11 +57,11 @@ namespace PlayMeow.Auth
 
             var variables = new Dictionary<string, string>
             {
-                { "username", username },
-                { "password", password }
+                { Username, username },
+                { Password, password }
             };
 
-            GraphQLResponse response = await _client.QueryAsync(query, variables);
+            var response = await _client.QueryAsync(query, variables);
             return ProcessAuthResponse(response, AuthMode.Login);
         }
 
@@ -88,11 +90,11 @@ namespace PlayMeow.Auth
 
             var variables = new Dictionary<string, string>
             {
-                { "username", username },
-                { "password", password }
+                { Username, username },
+                { Password, password }
             };
 
-            GraphQLResponse response = await _client.QueryAsync(query, variables);
+            var response = await _client.QueryAsync(query, variables);
             return ProcessAuthResponse(response, AuthMode.SignUp);
         }
 
@@ -115,7 +117,7 @@ namespace PlayMeow.Auth
 
             const string query = "{ me { id username } }";
 
-            GraphQLResponse response = await _client.QueryAsync(query, authToken: token);
+            var response = await _client.QueryAsync(query, authToken: token);
 
             if (!string.IsNullOrEmpty(response.networkError))
             {
@@ -187,7 +189,7 @@ namespace PlayMeow.Auth
                 return LoginResult.Fail(defaultError);
             }
 
-            AuthPayload payload = mode == AuthMode.SignUp
+            var payload = mode == AuthMode.SignUp
                 ? response.data?.signup
                 : response.data?.login;
 

@@ -1707,6 +1707,8 @@ GameObject:
   - component: {fileID: 2954480290845519473}
   - component: {fileID: 2954480290845519478}
   - component: {fileID: 2954480290845519479}
+  - component: {fileID: 3798480744000255835}
+  - component: {fileID: 8531426760728591754}
   m_Layer: 0
   m_Name: LoginCanvas
   m_TagString: Untagged
@@ -1829,6 +1831,47 @@ MonoBehaviour:
   inputHintText: {fileID: 2954480290683716912}
   errorText: {fileID: 3710326539035015775}
   errorTextShake: {fileID: 8220387917917083906}
+  onLoginSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8531426760728591754}
+        m_TargetAssemblyTypeName: PlayMeow.UI.SceneTransition, PlayMeowInterview
+        m_MethodName: StartTransition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!225 &3798480744000255835
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954480290845519476}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &8531426760728591754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954480290845519476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbdae95fed08a9048aa84fa7bb4c6286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 3798480744000255835}
+  targetSceneName: Main
 --- !u!1 &2954480290912163111
 GameObject:
   m_ObjectHideFlags: 0

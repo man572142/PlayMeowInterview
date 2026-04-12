@@ -4,7 +4,7 @@ using PlayMeow.Auth;
 using PlayMeowInterview.UI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace PlayMeow.UI
@@ -17,7 +17,6 @@ namespace PlayMeow.UI
         [SerializeField] private TMP_InputField confirmPasswordInput;
 
         [Header("Buttons")]
-        [FormerlySerializedAs("authButton")]
         [SerializeField] private Button authButton;
         [SerializeField] private TMP_Text authButtonText;
         [SerializeField] private Button googleLoginButton;
@@ -36,6 +35,9 @@ namespace PlayMeow.UI
         [SerializeField] private TextMeshProUGUI inputHintText;
         [SerializeField] private TextMeshProUGUI errorText;
         [SerializeField] private UIShake errorTextShake;
+
+        [Header("Events")]
+        [SerializeField] private UnityEvent onLoginSuccess;
 
         private AuthMode currentAuthMode = AuthMode.Login;
 
@@ -137,7 +139,7 @@ namespace PlayMeow.UI
 
             if (result.Success)
             {
-                OnLoginSuccess(result.Token);
+                OnLoginSuccess();
             }
             else
             {
@@ -175,11 +177,6 @@ namespace PlayMeow.UI
                 AuthMode.SignUp => "註冊新帳號",
                 _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
             };
-        }
-
-        private void OnCloseClicked()
-        {
-            gameObject.SetActive(false);
         }
 
         private void OpenTermsOfService()
@@ -226,9 +223,14 @@ namespace PlayMeow.UI
             }
         }
 
-        private void OnLoginSuccess(string token)
+        private void OnLoginSuccess()
         {
-            // TODO: store token and navigate to main scene
+            onLoginSuccess.Invoke();
+        }
+
+        private static void OnCloseClicked()
+        {
+            Application.Quit();
         }
     }
 }
