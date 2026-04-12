@@ -60,6 +60,33 @@ namespace PlayMeow.UI
             SetAuthMode(currentAuthMode);
         }
 
+        private async void Start()
+        {
+            if (!TokenStore.HasToken())
+            {
+                return;
+            }
+
+            SetInteractable(false);
+
+            var result = await AuthService.Instance.AutoLoginAsync();
+
+            // Unity destroys the C# wrapper on scene unload; the overloaded == catches that.
+            if (this == null)
+            {
+                return;
+            }
+
+            if (result.Success)
+            {
+                OnLoginSuccess();
+            }
+            else
+            {
+                SetInteractable(true);
+            }
+        }
+
         private void OnDestroy()
         {
             authButton.onClick.RemoveListener(OnAuthClicked);
