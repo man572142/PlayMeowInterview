@@ -60,7 +60,38 @@ namespace PlayMeow.Auth
             };
 
             GraphQLResponse response = await _client.QueryAsync(query, variables);
-            return ProcessAuthResponse(response);
+            return ProcessAuthResponse(response, "login");
+        }
+
+        // -----------------------------------------------------------------------
+        // Signup
+        // -----------------------------------------------------------------------
+
+        /// <summary>
+        /// Register a new account via the GraphQL signup mutation.
+        /// Saves the token to PlayerPrefs on success (auto-login after signup).
+        /// </summary>
+        public async Task<LoginResult> SignupAsync(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return LoginResult.Fail("請填寫帳號和密碼");
+
+            const string query = @"
+                mutation Signup($username: String!, $password: String!) {
+                    signup(username: $username, password: $password) {
+                        token
+                        user { id username }
+                    }
+                }";
+
+            var variables = new Dictionary<string, string>
+            {
+                { "username", username },
+                { "password", password }
+            };
+
+            GraphQLResponse response = await _client.QueryAsync(query, variables);
+            return ProcessAuthResponse(response, "signup");
         }
 
         // -----------------------------------------------------------------------
@@ -136,7 +167,7 @@ namespace PlayMeow.Auth
         // Helpers
         // -----------------------------------------------------------------------
 
-        internal LoginResult ProcessAuthResponse(GraphQLResponse response)
+        internal LoginResult ProcessAuthResponse(GraphQLResponse response, string operation)
         {
             if (!string.IsNullOrEmpty(response.networkError))
             {
@@ -144,22 +175,28 @@ namespace PlayMeow.Auth
                 return LoginResult.Fail("網路連線失敗");
             }
 
+            string defaultError = operation == "signup" ? "註冊失敗" : "帳號或密碼錯誤";
+
             // GraphQL returns HTTP 200 even on auth failure; always check errors[].
             if (response.HasErrors)
             {
-                string msg = response.FirstError ?? "帳號或密碼錯誤";
+                string msg = response.FirstError ?? defaultError;
                 Debug.LogWarning($"[AuthService] GraphQL error: {msg}");
-                return LoginResult.Fail("帳號或密碼錯誤");
+                return LoginResult.Fail(defaultError);
             }
 
-            string token = response.data?.login?.token;
+            AuthPayload payload = operation == "signup"
+                ? response.data?.signup
+                : response.data?.login;
+
+            string token = payload?.token;
             if (string.IsNullOrEmpty(token))
             {
-                Debug.LogWarning("[AuthService] Login succeeded but token was empty.");
-                return LoginResult.Fail("帳號或密碼錯誤");
+                Debug.LogWarning($"[AuthService] {operation} succeeded but token was empty.");
+                return LoginResult.Fail(defaultError);
             }
 
-            var graphqlUser = response.data.login.user;
+            var graphqlUser = payload.user;
             var user = graphqlUser != null
                 ? new UserInfo { Id = graphqlUser.id, Username = graphqlUser.username }
                 : null;
